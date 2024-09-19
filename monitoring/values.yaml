@@ -1,0 +1,19 @@
+prometheus:
+  prometheusSpec:
+    storageSpec:
+      volumeClaimTemplate:
+        spec:
+          storageClassName: manual
+          accessModes: 
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 10Gi  # Adjust the storage size as needed
+grafana:
+  persistence:
+    enabled: true
+    storageClassName: manual
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi
+

@@ -1,61 +1,61 @@
- helm uninstall prometheus -n monitoring
-  419  kubectl delete namespace monitoring
-  420  kubectl create namespace monitoring
-  421  ls -l
-  422  cat local-storageclass.yaml 
-  423  kubectl apply -f local-storageclass.yaml
-  424  ls
-  425  cd volume/
-  426  ls
-  427  rm -rf *
-  428  vim pv-config.yaml
-  429  kubectl apply -f pv-config.yaml
-  430  cd ..
-  431  vim values.yaml
-  432  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-  433  helm repo update
-  434  helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
-  435  kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 &
-  436  k get pods -n monitoring
-  437  kubectl get statefulsets -n monitoring
-  438  kubectl get pods -n monitoring
-  439  kubectl describe pod prometheus-prometheus-kube-prometheus-prometheus-0 -n monitoring
-  440  kubectl describe pod prometheus-grafana-5d4458849b-mzzkq -n monitoring
-  441  helm uninstall prometheus -n monitoring
-  442  helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
-  443  kubectl get statefulsets -n monitoring
-  444  kubectl get pods -n monitoring
-  445  kubectl describe pod prometheus-grafana-5d4458849b-zslbm -n monitoring
-  446  k get pv
-  447  cat values.yaml 
-  448  k get pvc
-  449  k get pvc -n monitoring
-  450  kubectl delete pv grafana-pv
-  451  kubectl delete pv prometheus-pv
-  452  cd volume/
-  453  cat pv-config.yaml 
-  454  k get pvc -n monitoring
-  455  k delete  pvc -n monitoring prometheus-grafana
-  456  k delete  pvc -n monitoring prometheus-prometheus-kube-prometheus-prometheus-db-prometheus-prometheus-kube-prometheus-prometheus-0
-  457  kubectl apply -f pv-config.yaml
-  458  kubectl get pvc -n monitoring
-  459  kubectl get pv
-  460  kubectl get pvc -n monitoring
-  461  kubectl get pv
-  462  kubectl get pods -n monitoring
-  463  kubectl get pvc -n monitoring
-  464  kubectl get pv
-  465  cd ..
-  466  vim values.yaml 
-  467  helm upgrade prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
-  468  kubectl get pvc -n monitoring
-  469  kubectl get pods -n monitoring
-  470  kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 &
-  471  kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
-  472  kubectl get svc prometheus-kube-prometheus-prometheus -n monitoring
-  473  kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
-  474  kubectl get svc prometheus-grafana -n monitoring
-  475  kubectl get nodes -o wide
-  476  k get pods -n monitoring -o wide
-  477  kubectl get secrets -n monitoring
-  478  kubectl get secret prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+helm uninstall prometheus -n monitoring
+kubectl create namespace monitoring
+ls -l
+kubectl delete namespace monitoring
+cat local-storageclass.yaml 
+kubectl apply -f local-storageclass.yaml
+ls
+cd volume/
+ls
+rm -rf *
+vim pv-config.yaml
+kubectl apply -f pv-config.yaml
+cd ..
+vim values.yaml
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo update
+helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 &
+k get pods -n monitoring
+kubectl get statefulsets -n monitoring
+kubectl get pods -n monitoring
+kubectl describe pod prometheus-prometheus-kube-prometheus-prometheus-0 -n monitoring
+kubectl describe pod prometheus-grafana-5d4458849b-mzzkq -n monitoring
+helm uninstall prometheus -n monitoring
+helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+kubectl get statefulsets -n monitoring
+kubectl get pods -n monitoring
+kubectl describe pod prometheus-grafana-5d4458849b-zslbm -n monitoring
+k get pv
+cat values.yaml 
+k get pvc
+k get pvc -n monitoring
+kubectl delete pv grafana-pv
+kubectl delete pv prometheus-pv
+cd volume/
+cat pv-config.yaml 
+k get pvc -n monitoring
+k delete  pvc -n monitoring prometheus-grafana
+k delete  pvc -n monitoring prometheus-prometheus-kube-prometheus-prometheus-db-prometheus-prometheus-kube-prometheus-prometheus-0
+kubectl apply -f pv-config.yaml
+kubectl get pvc -n monitoring
+kubectl get pv
+kubectl get pvc -n monitoring
+kubectl get pv
+kubectl get pods -n monitoring
+kubectl get pvc -n monitoring
+kubectl get pv
+cd ..
+vim values.yaml 
+helm upgrade prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+kubectl get pvc -n monitoring
+kubectl get pods -n monitoring
+kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 &
+kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
+kubectl get svc prometheus-kube-prometheus-prometheus -n monitoring
+kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
+kubectl get svc prometheus-grafana -n monitoring
+kubectl get nodes -o wide
+k get pods -n monitoring -o wide
+kubectl get secrets -n monitoring
+kubectl get secret prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo

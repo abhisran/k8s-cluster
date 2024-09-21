@@ -10,7 +10,7 @@ spec:
     - ReadWriteOnce
   storageClassName: manual
   hostPath:
-    path: /mnt/data/prometheus  # Adjust path as needed
+    path: /mnt/nfs-share/prometheus  # Adjust path as needed
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -23,5 +23,5 @@ spec:
     - ReadWriteOnce
   storageClassName: manual
   hostPath:
-    path: /mnt/data/grafana  # Adjust path as needed
+    path: /mnt/nfs-share/grafana  # Adjust path as needed
 

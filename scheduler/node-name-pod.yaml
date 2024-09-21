@@ -1,0 +1,12 @@
+apiVersion: v1 
+kind: Pod 
+metadata: 
+  name: node-name-pod 
+spec: 
+  # Using Node name 
+  nodeName: worker-node-1
+  containers: 
+    - name: pod
+      image: nginx:latest 
+      ports: 
+       - containerPort: 80

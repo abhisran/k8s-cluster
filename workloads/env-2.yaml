@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: demo-env-2
+  labels: 
+    purpose: demonstrate-env-vars
+spec: 
+  containers: 
+    - name: demo-env-2
+      image: gcr.io/google-samples/node-hello:1.0
+      env: 
+        - name: DEMO_MESSAGE
+          value: "Hello from k8s cluster, I am a env variable"
+

@@ -1,61 +1,826 @@
-helm uninstall prometheus -n monitoring
-kubectl create namespace monitoring
-ls -l
-kubectl delete namespace monitoring
-cat local-storageclass.yaml 
-kubectl apply -f local-storageclass.yaml
-ls
-cd volume/
-ls
-rm -rf *
-vim pv-config.yaml
-kubectl apply -f pv-config.yaml
-cd ..
-vim values.yaml
-helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-helm repo update
-helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
-kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 &
-k get pods -n monitoring
-kubectl get statefulsets -n monitoring
-kubectl get pods -n monitoring
-kubectl describe pod prometheus-prometheus-kube-prometheus-prometheus-0 -n monitoring
-kubectl describe pod prometheus-grafana-5d4458849b-mzzkq -n monitoring
-helm uninstall prometheus -n monitoring
-helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
-kubectl get statefulsets -n monitoring
-kubectl get pods -n monitoring
-kubectl describe pod prometheus-grafana-5d4458849b-zslbm -n monitoring
-k get pv
-cat values.yaml 
-k get pvc
-k get pvc -n monitoring
-kubectl delete pv grafana-pv
-kubectl delete pv prometheus-pv
-cd volume/
-cat pv-config.yaml 
-k get pvc -n monitoring
-k delete  pvc -n monitoring prometheus-grafana
-k delete  pvc -n monitoring prometheus-prometheus-kube-prometheus-prometheus-db-prometheus-prometheus-kube-prometheus-prometheus-0
-kubectl apply -f pv-config.yaml
-kubectl get pvc -n monitoring
-kubectl get pv
-kubectl get pvc -n monitoring
-kubectl get pv
-kubectl get pods -n monitoring
-kubectl get pvc -n monitoring
-kubectl get pv
-cd ..
-vim values.yaml 
-helm upgrade prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
-kubectl get pvc -n monitoring
-kubectl get pods -n monitoring
-kubectl port-forward svc/prometheus-kube-prometheus-prometheus -n monitoring 9090:9090 &
-kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
-kubectl get svc prometheus-kube-prometheus-prometheus -n monitoring
-kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
-kubectl get svc prometheus-grafana -n monitoring
-kubectl get nodes -o wide
-k get pods -n monitoring -o wide
-kubectl get secrets -n monitoring
-kubectl get secret prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+    1  free -h
+    2  sudo swapoff -a
+    3  free -h
+    4  sudo vi /etc/fstab 
+    5  sudo rm /swap.img 
+    6  sudo apt update 
+    7  sudo apt upgrade -y
+    8  sudo vim /etc/ssh/sshd_config
+    9  ip a
+   10  sudo shutdown now
+   11  sudo vim /etc/netplan/00-installer-config.yaml 
+   12  ip a
+   13  ping google.com
+   14  cat /etc/resolv.conf 
+   15  sudo netplan apply
+   16  sudo reboot now
+   17  sudo vim /etc/netplan/00-installer-config.yaml 
+   18  sudo netplan apply
+   19  ip a
+   20  cat /etc/netplan/00-installer-config.yaml 
+   21  sudo cat /etc/netplan/00-installer-config.yaml
+   22  ping google.com
+   23  sudo cat /etc/netplan/00-installer-config.yaml
+   24  sudo vim ./etc/netplan/00-installer-config.yaml
+   25  sudo vim /etc/netplan/00-installer-config.yaml
+   26  sudo netplan apply
+   27  sudo netplan try && netplan apply
+   28  sudo netplan try && sudo netplan apply
+   29  ip a
+   30  ping google.com
+   31  sudo vim /etc/resolv.conf 
+   32  cat /etc/resolv.conf 
+   33  sudo cat /etc/netplan/00-installer-config.yaml 
+   34  ping google.com
+   35  sudo vim /etc/netplan/00-installer-config.yaml 
+   36  sudo netplan try && sudo netplan apply
+   37  ping google.com
+   38  cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
+   39  net.ipv4.ip_forward = 1
+   40  EOF
+   41  sudo sysctl --system
+   42  sysctl net.ipv4.ip_forward
+   43  # Add Docker's official GPG key:
+   44  sudo apt-get update
+   45  sudo apt-get install ca-certificates curl
+   46  sudo install -m 0755 -d /etc/apt/keyrings
+   47  sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+   48  sudo chmod a+r /etc/apt/keyrings/docker.asc
+   49  # Add the repository to Apt sources:
+   50  echo   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+   51    $(. /etc/os-release && echo "$VERSION_CODENAME") stable" |   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   52  sudo apt-get update && sudo apt-get install containerd.io && systemctl enable --now containerd
+   53  sudo systemctl status containerd
+   54  wget https://github.com/containernetworking/plugins/releases/download/v1.4.0/cni-plugins-linux-amd64-v1.4.0.tgz
+   55  mkdir -p /opt/cni/bin
+   56  tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
+   57  sudo mkdir -p /opt/cni/bin
+   58  tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
+   59  sudo tar Cxzvf /opt/cni/bin cni-plugins-linux-amd64-v1.4.0.tgz
+   60  sudo -i
+   61  mkdir -p $HOME/.kube
+   62  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+   63  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+   64  kubectl get node
+   65  sudo cat /etc/netplan/00-installer-config.yaml 
+   66  sudo kubeadm token create --print-join-command
+   67  kubectl get node
+   68  sudo shutdown now
+   69  pwd
+   70  ls -l
+   71  mkdir vscode
+   72  cd vscode/
+   73  kubectl get node
+   74  kubectl delete node worker-node
+   75  sudo kubeadm token create --print-join-command
+   76  kubectl get node
+   77  kubectl get pod -n kube-system
+   78  free -h
+   79  alias
+   80  alias k=kubectl
+   81  k get nodes -o wide
+   82  k get pods -n kube-system
+   83  k run nginxpod --image=nginx --port 80
+   84  k get pods
+   85  k describe pod nginxpod
+   86  k get pods
+   87  k get svc
+   88  k exec -it nginxpod -- /bin/sh
+   89  k logs nginxpod
+   90  k delete nginxpod
+   91  k delete pod nginxpod
+   92  k get nodes
+   93  k config view
+   94  k config current-context
+   95  k config get-context kubernetes-admin@kubernetes
+   96  k config get-contexts kubernetes-admin@kubernetes
+   97  k config get-contexts
+   98  k cluster-info
+   99  k cluster-info dump
+  100  ls
+  101  mv cni-plugins-linux-amd64-v1.4.0.tgz /tmp
+  102  ls
+  103  cd vscode/
+  104  mkdir cluster-administration
+  105  k cluster-info dump > cluster-dump
+  106  k get node worker-node-1
+  107  k describe node worker-node-1
+  108  k describe node worker-node-1 | less
+  109  k get namespaces
+  110  k get names
+  111  k get namess
+  112  k get namesp
+  113  k get namespaces
+  114  k describe node worker-node-1 | less
+  115  k get pods
+  116  k get pods -A
+  117  k get pods -A -o wide
+  118  ls -l /etc/kubernetes
+  119  ls -l /etc/kubernetes/manifests/
+  120  ls -l /etc/kubernetes/pki
+  121  ls -l /etc/kubernetes/admin.conf 
+  122  less /etc/kubernetes/admin.conf
+  123  sudo less /etc/kubernetes/admin.conf 
+  124  k get pods -n kube-system
+  125  k get pods -n kube-system -o wide
+  126  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.7.0/aio/deploy/recommended.yaml
+  127  k get pods 
+  128  k get pods -n kube-system 
+  129  crictl ps
+  130  sudo crictl
+  131  which crictl
+  132  ls -ltr /usr/bin/crictl 
+  133  id crictl
+  134  cat /etc/group
+  135  k get pods -n kubernetes-dashboard
+  136  k get pods -n kubernetes-dashboard -o wide
+  137  k get deploy -n kubernetes-dashboard -o wide
+  138  k get svc -n kubernetes-dashboard -o wide
+  139  k edit svc kubernetes-dashboard kubernetes-dashboard
+  140  k edit svc -n kubernetes-dashboard kubernetes-dashboard
+  141  k get svc -n kubernetes-dashboard -o wide
+  142  k get pods -n kubernetes-dashboard
+  143  k get pods -n kubernetes-dashboard -o wide
+  144  k get svc -n kubernetes-dashboard -o wide
+  145  kubectl get nodes -o wide
+  146  ls -l
+  147  cd cluster-administration/service-account/
+  148  cat ServiceAccount.yaml 
+  149  k apply -f ServiceAccount.yaml 
+  150  vi test.yaml
+  151  k apply -f ClusterRoleBinding.yaml 
+  152  k -n kubernetes-dashboard create token admin-user
+  153  cd
+  154  history
+  155  k run nginxpod --image=nginx --port 80
+  156  sudo apt install etcd-client
+  157  ls
+  158  cd vscode/
+  159  ls
+  160  mkdir etcd
+  161  cd etcd
+  162  sudo chmod a+rw -R /etc/kubernetes/pki
+  163  ls -l /etc/kubernetes/pki
+  164  ls -ld /etc/kubernetes/pki
+  165  sudo ETCDCTL_API=3 etcdctl snapshot save etcd_backup.db --endpoints https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt
+  166  ls -l
+  167  less etcd_backup.db 
+  168  sudo ETCDCTL_API=3 etcdctl --write-out=table snapshot status etcd_backup.db --endpoints https://127.0.0.1:2379 --cert=/etc/kubernetes/pki/etcd/server.crt --key=/etc/kubernetes/pki/etcd/server.key --cacert=/etc/kubernetes/pki/etcd/ca.crt
+  169  k api-resources
+  170  history
+  171  k get ns
+  172  k api-resources
+  173  k explain pod.spec.containers
+  174  k explain pod.spec.containers --recursive
+  175  cd ../workloads/
+  176  k get pods
+  177  k get po
+  178  k get pods
+  179  k get nodes
+  180  sudo shutdown now
+  181  python3
+  182  kubectl get nodes -o wide
+  183  cd cluster-administration/service-account/
+  184  cd
+  185  cd vscode/workloads/
+  186  k apply -f pod.yaml 
+  187  kubectl apply -f pod.yaml
+  188  kubectl apply -f multi-container-pod.yaml 
+  189  k get p 
+  190  alias k=kubectl 
+  191  k get p 
+  192  k get po
+  193  k -n kubernetes-dashboard create token admin-user
+  194  alias k=kubectl
+  195  k -n kubernetes-dashboard create token admin-user
+  196  top
+  197  ip a
+  198  ping 192.168.1.3
+  199  less /etc/kubernetes/manifests/kube-apiserver.yaml 
+  200  sudo less /etc/kubernetes/manifests/kube-apiserver.yaml 
+  201  ls
+  202  cd vscode/
+  203  ls
+  204  cd workloads/
+  205  ls
+  206  k apply -f init-container.yaml 
+  207  alias k=kubectl
+  208  k apply -f init-container.yaml 
+  209  k get pod purple -w
+  210  k get pod purple
+  211  k describe pod purple
+  212  k get pods
+  213  k delete pod purple
+  214  ls -l /home/abhishek
+  215  ls -l /home/abhishek/.kube/
+  216  cd /home/abhishek/.kube/
+  217  pw
+  218  pwd
+  219  ls -l
+  220  cd
+  221  ssh-keygen
+  222  ssh-copy-id -i ~/.ssh/id_rsa.pub abhishek@192.168.1.11
+  223  ssh-copy-id -i ~/.ssh/id_rsa.pub abhishek@192.168.1.12
+  224  cat /etc/hosts
+  225  sudo vim /etc/hosts
+  226  ssh --help
+  227  ssh -help
+  228  ssh abhishek@worker-1 "ls -l"
+  229  ssh abhishek@worker-1
+  230  ssh -t abhishek@worker-2 "top -bn1 | grep Cpu"
+  231  ssh abhishek@worker-2
+  232  ssh -t abhishek@worker-2 "top -bn1 | grep Cpu"
+  233  ssh -t abhishek@worker-2 "top -bn1 | grep Mem"
+  234  ssh -t abhishek@worker-2 "sudo shutdown now"
+  235  sudo shutdown now
+  236  kubectl get nodes
+  237  kubectl get pods
+  238  ls
+  239  cd vscode/
+  240  cd k8s-cluster/
+  241  ls -l
+  242  helm
+  243  ls -l
+  244  cd vscode/
+  245  ls -l
+  246  sudo apt install git
+  247  git clone https://github.com/abhisran/k8s-cluster.git
+  248  ls -l
+  249  mv cluster-administration etcd workloads k8s-cluster/
+  250  ls -la
+  251  cd k8s-cluster/
+  252  ls -la
+  253  git status
+  254  git add .
+  255  git status
+  256  git commit -m "first-commit"
+  257  git config --global user.email "abhisran6@gmail.com"
+  258  git config --global user.name "abhisran"
+  259  git commit -m "first-commit"
+  260  git push origin main
+  261  git pull
+  262  ls -l
+  263  helm version
+  264  sudo apt update
+  265  curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+  266  ls -l
+  267  helm version
+  268  ls
+  269  mkdir helm
+  270  cd helm/
+  271  ls -l
+  272  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  273  helm 
+  274  helm repo 
+  275  helm repo list
+  276  helm repo update
+  277  helm install prometheus prometheus-community/prometheus
+  278  alias k=kubectl
+  279  k get pod
+  280  k get pod | grep prom
+  281  k get n
+  282  k get ns
+  283  k get pods
+  284  k get pod prometheus-server-dd484f8d9-jh79b -w
+  285  k getet pod -o wide
+  286  k get pod -o wide
+  287  history | grep ssh
+  288  ssh -t abhishek@worker-1 "top -bn1 | grep Cpu"
+  289  ssh -t abhishek@worker-1 "top -bn1 | grep mem"
+  290  ssh -t abhishek@worker-1 "top -bn1 | grep Mem"
+  291  k get pods
+  292  k get logs prometheus-server-dd484f8d9-jh79b
+  293  k logs prometheus-server-dd484f8d9-jh79b
+  294  k log prometheus-server-dd484f8d9-jh79b
+  295  k logs prometheus-server-dd484f8d9-jh79b
+  296  k get pods
+  297  history
+  298  helm
+  299  helm uninstall prometheus prometheus-community/prometheus
+  300  helm list
+  301  helm repo list
+  302  k get pods
+  303  k get pod
+  304  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  305  helm repo add grafana https://grafana.github.io/helm-charts
+  306  helm repo update
+  307  kubectl create namespace monitoring
+  308  helm install prometheus prometheus-community/prometheus --namespace monitoring
+  309  kubectl get pods -n monitoring
+  310  kubectl get pods -n monitoring -w
+  311  kubectl get pods -n monitoring
+  312  kubectl describe pod prometheus-alertmanager-0 -n monitoring
+  313  kubectl describe nodes
+  314  kubectl get pvc -n monitoring
+  315  ls -l
+  316  cd ..
+  317  ls -l
+  318  mkdir persistent-volumes
+  319  cd persistent-volumes
+  320  vim prometheus-pv.yaml
+  321  ls -l /mnt
+  322  sudo mkdir -p /mnt/data/prometheus-server
+  323  sudo mkdir -p /mnt/data/prometheus-alertmanager
+  324  ls -l
+  325  ls -l /mnt
+  326  sudo chmod 777 /mnt/data/prometheus-server
+  327  sudo chmod 777 /mnt/data/prometheus-alertmanager
+  328  ls -ld /mnt/data/prometheus-server
+  329  ls -ld /mnt/data/prometheus-alertmanager
+  330  kubectl apply -f prometheus-pv.yaml
+  331  k get pod
+  332  k get pod -n monitoring
+  333  k delete pod prometheus-alertmanager-0 -n monitoring
+  334  k get pod -n monitoring
+  335  k delete pod -n monitoring prometheus-server-dd484f8d9-wrx7x
+  336  k get pod -n monitoring
+  337  k get pod -n monitoring -w
+  338  ssh abhishek@worker-node-1
+  339  ssh abhishek@worker-node-2
+  340  k get pod -n monitoring
+  341  k delete pod -n monitoring prometheus-server-dd484f8d9-wrx7x
+  342  k delete pod -n monitoring prometheus-server-dd484f8d9-4l5v8
+  343  k get pod -n monitoring
+  344  k delete pod prometheus-alertmanager-0 -n monitoring
+  345  k get pod -n monitoring
+  346  k get pod -n monitoring -w
+  347  k describe pod -n monitoring prometheus-alertmanager-0
+  348  cd
+  349  sudo apt update
+  350  sudo apt install nfs-kernel-server
+  351  sudo mkdir -p /mnt/nfs-share
+  352  sudo chmod 777 /mnt/nfs-share
+  353  sudo nano /etc/exports
+  354  sudo exportfs -rav
+  355  sudo systemctl restart nfs-kernel-server
+  356  sudo systemctl enable nfs-kernel-server
+  357  showmount -e
+  358  k get pod -n monitoring
+  359  cd vscode/k8s-cluster/
+  360  ls
+  361  cd persistent-volumes/
+  362  ls
+  363  vim nfs-pv.yaml
+  364  k apply -f nfs-pv.yaml 
+  365  vim nfs-pvc.yaml
+  366  k apply -f nfs-pvc.yaml 
+  367  helm upgrade prometheus prometheus-community/prometheus --namespace monitoring   --set server.persistentVolume.existingClaim=prometheus-pvc   --set alertmanager.persistentVolume.existingClaim=alertmanager-pvc
+  368  kubectl get pods -n monitoring
+  369  kubectl delete pod prometheus-alertmanager-0 -n monitoring
+  370  kubectl get pods -n monitoring
+  371  k get pv
+  372  ls -l
+  373  k get pv
+  374  kubectl delete pvc storage-prometheus-alertmanager-0 -n default
+  375  kubectl delete pvc prometheus-server -n monitoring
+  376  kubectl delete pv prometheus-alertmanager-pv
+  377  kubectl delete pv prometheus-server-pv
+  378  kubectl get pv
+  379  sudo rm -rf /mnt/data/prometheus-server
+  380  sudo rm -rf /mnt/data/prometheus-alertmanager
+  381  ls -l /mnt
+  382  ls -l /mnt/nfs-share/
+  383  k get pod -n monitoring
+  384  k describe pod prometheus-alertmanager-0 -n monitoring
+  385  history
+  386  helm uninstall prometheus prometheus-community/prometheus --namespace monitoring
+  387  k get pod -n monitoring
+  388  helm install prometheus prometheus-community/prometheus --namespace monitoring
+  389  k get pod -n monitoring
+  390  k get pod -n monitoring -w
+  391  k get pod -n monitoring
+  392  k get pvc
+  393  k get pv
+  394  k get 
+  395  k get -h
+  396  k get pv
+  397  k delete pv nfs-alertmanager-pv
+  398  k get pv
+  399  k explain pv
+  400  k help pv
+  401  k get pv
+  402  k get pod -n monitoring
+  403  helm uninstall prometheus prometheus-community/prometheus --namespace monitoring
+  404  k get pv
+  405  k delete pv nfs-prometheus-pv
+  406  k explain pvc
+  407  ls -l
+  408  rm prometheus-pv.yaml 
+  409  ls
+  410  ls -l
+  411  cat nfs-pv.yaml 
+  412  cat nfs-pvc.yaml 
+  413  k get pv
+  414  k describe pv nfs-prometheus-pv
+  415  k get pvc
+  416  kubectl delete pvc prometheus-pvc -n monitoring
+  417  kubectl get pvc -n monitoring
+  418  kubectl delete pvc alertmanager-pvc -n monitoring
+  419  kubectl get pvc -n monitoring
+  420  kubectl delete pvc storage-prometheus-alertmanager-0 -n monitoring
+  421  kubectl edit pv nfs-prometheus-pv
+  422  k get pv
+  423  ls -l
+  424  k apply -f nfs-pv.yaml 
+  425  k apply -f nfs-pvc.yaml 
+  426  k get pv
+  427  k get pvc
+  428  k get pvc -n monitoring
+  429  helm install prometheus prometheus-community/prometheus --namespace monitoring
+  430  k get pods -n monitoring
+  431  k get pods -n monitoring -w
+  432  k describe pod -n monitoring prometheus-server-dd484f8d9-6cg2q
+  433  k get pods -n monitoring
+  434  k describe pod -n prometheus-alertmanager-0
+  435  k describe pod -n monitoring prometheus-alertmanager-0
+  436  cat *
+  437  kubectl delete pvc prometheus-pvc -n monitoring
+  438  kubectl delete pvc alertmanager-pvc -n monitoring
+  439  helm install prometheus prometheus-community/prometheus --namespace monitoring
+  440  helm uninstall prometheus prometheus-community/prometheus --namespace monitoring
+  441  helm install prometheus prometheus-community/prometheus --namespace monitoring
+  442  kubectl get pvc -n monitoring
+  443  kubectl get pods -n monitoring
+  444  kubectl get pod -n monitoring prometheus-server-dd484f8d9-tgvhz
+  445  kubectl describe pod -n monitoring prometheus-server-dd484f8d9-tgvhz
+  446  kubectl get pvc -n monitoring
+  447  kubectl get pv
+  448  ls
+  449  cat *
+  450  ls
+  451  cat nfs-pv.yaml 
+  452  cat nfs-pvc.yaml 
+  453  kubectl get pvc -n monitoring
+  454  kubectl get pv
+  455  kubectl describe pod -n monitoring prometheus-server-dd484f8d9-tgvhz
+  456  ls -ltr /mnt
+  457  ls -ltr /mnt/nfs-share/
+  458  kubectl delete pvc prometheus-pvc alertmanager-pvc -n monitoring
+  459  kubectl get pvc -n monitoring
+  460  kubectl delete pvc prometheus-server  -n monitoring
+  461  kubectl get pvc -n monitoring
+  462  kubectl delete pvc storage-prometheus-alertmanager-0  -n monitoring
+  463  ls
+  464  vi nfs-pv.yaml 
+  465  k get pvc
+  466  k get pv
+  467  k delete pv nfs-alertmanager-pv
+  468  k get pv
+  469  k delete pv nfs-prometheus-pv
+  470  helm uninstall prometheus prometheus-community/prometheus --namespace monitoring
+  471  rm -rf *
+  472  ls 
+  473  cd /mnt
+  474  ls
+  475  cd nfs-share/
+  476  ls -l
+  477  rm -rf *
+  478  sudo rm -rf *
+  479  ls -l
+  480  cd
+  481  cd vscode/k8s-cluster/
+  482  ls
+  483  cd persistent-volumes/
+  484  vim nfs-pv.yaml
+  485  kubectl apply -f prometheus-nfs-pv.yaml
+  486  mv nfs-pv.yaml prometheus-nfs-pv.yaml
+  487  kubectl apply -f prometheus-nfs-pv.yaml
+  488  vim prometheus-nfs-pvc.yaml
+  489  kubectl apply -f prometheus-nfs-pvc.yaml
+  490  kubectl create namespace monitoring
+  491  cd
+  492  cd vscode/k8s-cluster/
+  493  ls
+  494  mkdir prometheus-setup
+  495  cd prometheus-setup
+  496  ls -l
+  497  vim prometheus-values.yaml
+  498  helm install prometheus prometheus-community/prometheus -n monitoring -f prometheus-values.yaml
+  499  kubectl get pods -n monitoring
+  500  kubectl get pvc -n monitoring
+  501  ls
+  502  cat prometheus-values.yaml 
+  503  helm uninstall prometheus prometheus-community/prometheus -n monitoring -f prometheus-values.yaml
+  504  helm uninstall prometheus prometheus-community/prometheus -n monitoring 
+  505  kubectl get pods -n monitoring
+  506  kubectl get pvc -n monitoring
+  507  kubectl get pv -n monitoring
+  508  vim prometheus-values.yaml 
+  509  kubectl delete pvc storage-prometheus-alertmanager-0 -n monitoring
+  510  helm upgrade prometheus prometheus-community/prometheus -n monitoring -f /path/to/prometheus-values.yaml
+  511  ls
+  512  helm install prometheus prometheus-community/prometheus -n monitoring -f prometheus-values.yaml
+  513  kubectl get pods -n monitoring
+  514  kubectl get pvc -n monitoring
+  515  kubectl get pods -n monitoring
+  516  k describe pod prometheus-alertmanager-0
+  517  k describe pod prometheus-alertmanager-0 -n monitoring
+  518  ca prometheus-values.yaml 
+  519  cat prometheus-values.yaml 
+  520  vim prometheus-values.yaml 
+  521  helm upgrade prometheus prometheus-community/prometheus -n monitoring -f prometheus-values.yaml
+  522  kubectl delete pvc storage-prometheus-alertmanager-0 -n monitoring
+  523  kubectl get pvc -n monitoring
+  524  kubectl get pods -n monitoring
+  525  kubectl get pvc -n monitoring
+  526  kubectl get pods -n monitoring
+  527  sudo shutdown now
+  528  ls -l
+  529  cd vscode/
+  530  ls
+  531  cd k8s-cluster/
+  532  ls -l
+  533  cd ..
+  534  rm -rf k8s-cluster/
+  535  history | grep git clone
+  536  history | grep git
+  537  git clone https://github.com/abhisran/k8s-cluster.git
+  538  cd k8s-cluster/
+  539  ls -l
+  540  cd monitoring/
+  541  ls -l
+  542  k get -n
+  543  alias k=kubectl
+  544  k get -n
+  545  k get n
+  546  k get ns
+  547  k delete ns monitoring
+  548  ssh abhishek@worker-1
+  549  k get pv
+  550  k get pvc
+  551  k delete pv alertmanager-nfs-pv
+  552  k delete pv prometheus-nfs-pv
+  553  ls -l /mnt/
+  554  ls -l /mnt/nfs-share/
+  555  cd /mnt/nfs-share/
+  556  rm -rf *
+  557  sudo rm -rf *
+  558  ssh abhishek@worker-1
+  559  mkdir -m 777 prometheus
+  560  ls -l
+  561  mkdir -m 777 grafana
+  562  helm list
+  563  cd
+  564  cd vscode/k8s-cluster/
+  565  ls -l
+  566  cd monitoring/
+  567  k create ns monitoring
+  568  ls -l
+  569  k apply -f local-storageclass.yaml 
+  570  cd volume/
+  571  k apply -f pv-config.yaml 
+  572  ls -l
+  573  helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+  574  helm repo update
+  575  helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+  576  cd ..
+  577  ls -l
+  578  helm install prometheus prometheus-community/kube-prometheus-stack -n monitoring -f values.yaml
+  579  kubectl get statefulsets -n monitoring
+  580  kubectl get pods -n monitoring
+  581  kubectl get statefulsets -n monitoring
+  582  kubectl get pods -n monitoring
+  583  kubectl patch svc prometheus-kube-prometheus-prometheus -n monitoring -p '{"spec": {"type": "NodePort"}}'
+  584  kubectl get svc prometheus-kube-prometheus-prometheus -n monitoring
+  585  kubectl patch svc prometheus-grafana -n monitoring -p '{"spec": {"type": "NodePort"}}'
+  586  kubectl get svc prometheus-grafana -n monitoring
+  587  kubectl get nodes -o wide
+  588  k get pods -n monitoring -o wide
+  589  ls -l /mnt/nfs-share/
+  590  ls -l /mnt/nfs-share/grafana/
+  591  ls -l /mnt/nfs-share/prometheus/
+  592  ls -l /mnt/nfs-share/prometheus/prometheus-db/
+  593  kubectl get svc prometheus-grafana -n monitoring
+  594  kubectl get svc prometheus-kube-prometheus-prometheus -n monitoring
+  595  top -bn1 | grep Cpu
+  596  top -bn1 | grep Mem
+  597  df -h
+  598  kubectl get secret prometheus-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
+  599  k get svc
+  600  k get ns
+  601  k get svc -n kubernetes-dashboard
+  602  history | grep token
+  603  k -n kubernetes-dashboard create token admin-user
+  604  helm list
+  605  helm list -n monitoring
+  606  helm uninstall prometheus -n monitoring
+  607  top
+  608  k get pods -n monitoring
+  609  k get svc -n monitoring
+  610  k get pvc -n monitoring
+  611  k get pv -n monitoring
+  612  k delete ns monitoring
+  613  sudo shutdown now
+  614  exit
+  615  ls
+  616  cd vscode/
+  617  ls
+  618  cd k8s-cluster/
+  619  git status
+  620  git add .
+  621  git commit -m "updated storage path"
+  622  git pull origin main
+  623  git push origin main
+  624  alias k=kubectl
+  625  cd
+  626  k api-resource | grep Job
+  627  k api-resources | grep Job
+  628  k explain Job
+  629  k explain Job.spec
+  630  k explain Job.spec.template
+  631  k explain Job.spec.template.spec
+  632  k explain Job.spec.template.spec.restartPolicy
+  633  ip a
+  634  k get ns
+  635  history
+  636  k -n kubernetes-dashboard create token admin-user
+  637  k get svc -n kubernetes-dashboard
+  638  k explain Job.spec.template.spec.restartPolicy
+  639  k explain Job.spec.backofLimit
+  640  k explain Job.spec
+  641  ls
+  642  cd vscode/
+  643  ls
+  644  cd k8s-cluster/
+  645  ls
+  646  mkdir exercise-1
+  647  cd exercise-1
+  648  vim exercise-1.yaml
+  649  k apply -f exercise-1.yaml 
+  650  k get pod
+  651  k get pod | grep kucc8
+  652  cat exercise-1.yaml 
+  653  k get pod
+  654  k get pod | grep kucc8
+  655  k logs kucc8
+  656  df -h
+  657  cd vscode/
+  658  cd k8s-cluster/
+  659  cd exercise-1/
+  660  ls -l
+  661  k get pods
+  662  alias k=kubectl
+  663  k get pods
+  664  k delete pod kucc8
+  665  vim exercise-2.yaml
+  666  k explain Deploy
+  667  k explain Deployment
+  668  k explain Deployment.spec
+  669  vim exercise-2.yaml
+  670  k explain Deployment.spec
+  671  alias k=kubectl
+  672  k explain Deployment.spec
+  673  k explain Deployment.spec.selector
+  674  k explain Deployment.template
+  675  k explain Deployment
+  676  k explain Deployment.spec.template
+  677  k explain Deployment.spec
+  678  k explain Deployment.spec.strategy
+  679  k explain Deployment.spec.selector
+  680  k explain Deployment.spec.template
+  681  k explain Deployment.spec.template.metadata
+  682  k explain Deployment.spec.template.spec
+  683  k explain Deployment.spec
+  684  k explain Deployment.spec.strategy
+  685  k explain Deployment
+  686  alias k=kubectl
+  687  vim exercise-2.yaml
+  688  cd vscode/k8s-cluster/exercise-1/
+  689  vim exercise-2.yaml
+  690  cat exercise-
+  691  cat exercise-1.yaml 
+  692  vim exercise-2.yaml
+  693  k apply -f exercise-2.yaml 
+  694  vim exercise-2.yaml
+  695  cat exercise-2.yaml 
+  696  vim exercise-2.yaml
+  697  k apply -f exercise-2.yaml 
+  698  vim exercise-2.yaml
+  699  k apply -f exercise-2.yaml 
+  700  cat exercise-2.yaml 
+  701  vim exercise-2.yaml
+  702  k apply -f exercise-2.yaml 
+  703  vim exercise-2.yaml
+  704  k apply -f exercise-2.yaml 
+  705  cat exercise-
+  706  cat exercise-2.yaml 
+  707  vim exercise-2.yaml
+  708  k apply -f exercise-2.yaml 
+  709  k get deploy
+  710  k get deploy -o wide
+  711  k get deploy
+  712  k describe deloy recreate-deploy
+  713  k describe deploy recreate-deploy
+  714  history | grep token
+  715  kubectl -n kubernetes-dashboard create token admin-user
+  716  kubectl explain pod
+  717  kubectl explain metadata
+  718  kubectl explain pod.metadata
+  719  kubectl explain pod.spec
+  720  kubectl explain pod.spec.affinity
+  721  kubectl explain pod.spec.affinity.nodeAffinity
+  722  history | grep alias
+  723  alias k=kubectl
+  724  k explain Deployment.spec.strategy
+  725  k explain pod.spec.affinit
+  726  k explain pod.spec.affinity
+  727  k explain pod.spec.affinity.nodeAffinity
+  728  k explain pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution
+  729  k explain pod.spec.affinity.nodeAffinity.preferredDuringSchedulingIgnoredDuringExecution.weight
+  730  k explain labels
+  731  k explain label
+  732  k get node
+  733  k label node worker-node-1 disktype=ssd
+  734  k get node worker-node-1
+  735  k get node worker-node-1 -o wide
+  736  k get -l node worker-node-1
+  737  k get node worker-node-1 --show-label
+  738  k get node worker-node-1 --show-labels
+  739  k get node --show-labels
+  740  cd vscode/k8s-cluster/
+  741  mkdir scheduler
+  742  cd scheduler
+  743  vim node-name-pod.yaml
+  744  k apply -f node-name-pod.yaml 
+  745  k get pod/node-name-pod
+  746  k describe pod/node-name-pod
+  747  k get pod/node-name-pod -o wide
+  748  k get node --show-labels
+  749  k get node worker-node-1 --show-labels
+  750  k get nodes -l disktype=ssd
+  751  k get nodes -l disktype=ssdf
+  752  vim node-selector.yaml 
+  753  k apply -f node-selector.yaml 
+  754  k get pod/node-selector -o wide
+  755  k get pod -o wide | grep worker-node-1
+  756  k label node worker-node-2 disktype=ssd
+  757  k label node worker-node-2 network=fast
+  758  k get node worker-node-2 --show-labels
+  759  vim aff-pod.yaml
+  760  k apply -f aff-pod.yaml 
+  761  k get pod/affinity-pod -o wide
+  762  k get nodes -l network=fast
+  763  k get nodes -l disktype=ssd
+  764  history | grep token
+  765  kubectl -n kubernetes-dashboard create token admin-user
+  766  cd vscode/k8s-cluster/scheduler/
+  767  ls -l
+  768  mv node-name-pod.yaml nodeName.yaml
+  769  vi nodeName.yaml 
+  770  k apply -f nodeName.yaml 
+  771  alias k=kubectl
+  772  k apply -f nodeName.yaml 
+  773  k get node
+  774  k get pods
+  775  k describe pod/node-name-pod
+  776  cat nodeName.yaml 
+  777  k describe pod node-name-pod
+  778  k delete pod node-name-pod
+  779  k apply -f nodeName.yaml 
+  780  k describe pod node-name-pod
+  781  k delete pod node-name-pod
+  782  k get pods --show-labels
+  783  k get pods -l app=nginx
+  784  k get deploy
+  785  k delete deploy recreate-deploy
+  786  k get pods
+  787  k describe pod node-selector
+  788  ls
+  789  cat node-selector.yaml 
+  790  k get pods
+  791  k delete pod nginx
+  792  k delete node-selector.yaml
+  793  k delete -f node-selector.yaml
+  794  top
+  795  w
+  796  who
+  797  k get node --show-labels
+  798  history | grep fast
+  799  k label node worker-node-1 network=fast
+  800  k get node -l network=fast
+  801  ls
+  802  k get pod
+  803  k get pods
+  804  cat aff-pod.yaml 
+  805  cd ..
+  806  ls
+  807  cd workloads/
+  808  ls
+  809  cat daemonset.yaml 
+  810  docker ps
+  811  sudo crictl ps
+  812  k apply -f daemonset.yaml 
+  813  k get ds
+  814  k get ds -n kube-system
+  815  k delete -f daemonset.yaml 
+  816  vim daemonset.yaml 
+  817  k apply -f daemonset.yaml 
+  818  k get ds -n kube-system
+  819  k get pods -o wide -n kube-system grep fluentd-elasticsearch
+  820  k get pods -o wide -n kube-system | grep fluentd-elasticsearch
+  821  k delete -f daemonset.yaml 
+  822  cd ..
+  823  ls -l
+  824  history >> history.text 
+  825  less history.text 
+  826  history > history.text 

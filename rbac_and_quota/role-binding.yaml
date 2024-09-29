@@ -1,0 +1,27 @@
+apiVersion: rbac.authorization.k8s.io/v1 
+kind: RoleBinding 
+metadata: 
+  name: user1-binding 
+  namespace: simplilearn 
+subjects: 
+  - kind: ServiceAccount
+    name: user1 
+    apiGroup: ""
+roleRef: 
+  kind: Role 
+  name: user1-role 
+  apiGroup: "" 
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding 
+metadata: 
+  name: user2-binding 
+  namespace: simplilearn 
+subjects: 
+  - kind: ServiceAccount 
+    name: user2 
+    apiGroup: ""
+roleRef: 
+  kind: Role 
+  name: user2-role 
+  apiGroup: ""

@@ -1,0 +1,5 @@
+service:
+  ## @param service.type Service type
+  ##
+  type: NodePort
+replicaCount: 2

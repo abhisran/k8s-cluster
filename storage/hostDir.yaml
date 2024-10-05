@@ -13,4 +13,4 @@ spec:
     - name: log-volume 
       hostPath: 
         path: /var/log 
-        type: directory 
+        type: Directory 

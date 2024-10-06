@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-10-06T18:07:55Z"
+  labels:
+    app: abhi
+  name: abhi
+  namespace: default
+  resourceVersion: "354812"
+  uid: 182028d1-3ffb-4bc4-967d-61c8c8f4c6e3
+spec:
+  clusterIP: 10.98.52.255
+  clusterIPs:
+  - 10.98.52.255
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31867
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: abhi
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}
